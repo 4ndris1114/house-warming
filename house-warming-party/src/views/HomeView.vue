@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useGuestStore } from '@/stores/guestStore';
-import { computed, onMounted } from 'vue';
+import type { Guest } from '@/types/Guest';
+
+import { type  ComputedRef, onMounted, computed } from 'vue';
+
+import SignupForm from '@/components/SignupForm.vue';
 
 const guestStore = useGuestStore();
 
@@ -9,16 +13,20 @@ const guestStore = useGuestStore();
 onMounted(async () => {
   await guestStore.fetchGuests();
 });
-guestStore.fetchGuests();
-const guests = computed(() => guestStore.guests || []);
-console.log('From view:', guests.value);
+
+const guests: ComputedRef<Guest[]> = computed(() => guestStore.guests || []);
 
 </script>
 
 <template>
   <main>
-    <div v-if="guests.length > 0">
+    <SignupForm />
+    <div>
       <li v-for="guest in guests" :key="guest.uid">{{ guest.name }}</li>
     </div>
   </main>
 </template>
+
+<style>
+
+</style>
