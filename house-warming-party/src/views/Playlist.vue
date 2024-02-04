@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <h1 class="header-text">Add your favorite songs to our Spotify playlist</h1>
         <p class="sub-text">Let's make it a collection of bangers!</p>
       <button @click="redirectToPlaylist">Go to Playlist</button>
@@ -7,6 +7,12 @@
   </template>
 
 <style>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .header-text {
   font-size: 2.5em;
   color: #4285f4; /* Change the color to your preference */
