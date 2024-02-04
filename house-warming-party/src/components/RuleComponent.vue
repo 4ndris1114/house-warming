@@ -1,15 +1,19 @@
 <template>
     <div>
-        <p>Rule {{ props.ruleIndex }}</p>
-        {{ props.message }}
+        <p :class="{'fulfilled': rule.isFulfilled, 'notFulfilled': !rule.isFulfilled}">Rule {{ props.rule.index }}</p>
+        {{ props.rule.condition }}
     </div>
 </template>
 
 <script setup lang="ts">
+import { Rule } from '@/types/Rule';
+
 
 const props = defineProps({
-    message: String,
-    ruleIndex: Number,
+    rule: {
+        type: Rule,
+        required: true
+    }
 })
 
 </script>
@@ -24,6 +28,14 @@ p {
     margin-top: 0px;
     font-weight: bold;
     text-align: center;
+}
+
+.fulfilled {
+    background-color: green;
+}
+
+.notFulfilled {
+    background-color: red;
 }
 
 </style>

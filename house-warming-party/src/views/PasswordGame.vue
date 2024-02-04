@@ -2,11 +2,12 @@
     <div>
         <div>
             <label>Choose a password</label>
-            <input @input="checkOne()" @click="unlockFirst()" v-model="password" type="text">
+            <input @input="checkPassword()" @click="unlockFirst()" v-model="password" type="text">
             <hr>
         </div>
-        <div v-for="rule in rules" :key="rule.uid">
-            <RuleComponent v-if="rule.isUnlocked" :message="rule.condition" :ruleIndex="rule.index"></RuleComponent>
+        <div v-for="(rule, index) in rules" :key="rule.uid">
+            <RuleComponent v-if="index === 0 && rule.isUnlocked" :rule="rules[0]"></RuleComponent>
+            <RuleComponent v-else-if="rule.isUnlocked" :rule="rule"></RuleComponent>
         </div>
     </div>
 </template>
@@ -33,54 +34,47 @@ import { computed, type ComputedRef, onMounted, ref } from 'vue';
         rules.value[0].isUnlocked = true;
     }
 
-    const checkOne = () => {
+    const slovakSpecialLettersRegex = /[áäčďéíĺľňóôŕšťúýžÁÄČĎÉÍĹĽŇÓÔŔŠŤÚÝŽ]/;
+    const specialCharacterRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    const hungarianAnthem = [
+    "Isten,álddmegamagyart",
+    "Jó kedvvel,bőséggel,",
+    "Nyújtsfeléjevédőkart,",
+    "Haküzdellenséggel;",
+    "Balsorsakitrégentép,",
+    "Hozzrávígesztendőt,",
+    "Megbünhödtemárenép",
+    "Amultatsjövendőt!"
+    ];
+    const ruleChecks = [
+    (password: string) => password.length >= 7,
+    (password: string) => /[A-Z]/.test(password),
+    (password: string) => /\d/.test(password),
+    (password: string) => specialCharacterRegex.test(password),
+    (password: string) => slovakSpecialLettersRegex.test(password),
+    (password: string) => hungarianAnthem.some(line => password.includes(line))
+    ];
 
-        let ruleIndex = -1;
-        rules.value.forEach((rule) => {
-            if (rule.isUnlocked === true) {
-                ruleIndex = rule.index;
+
+    const checkPassword = () => {
+    rules.value.forEach((rule, index) => {
+        if (rule.isUnlocked) {
+            if (ruleChecks[index](password.value)) {
+                console.log('Rule ' + (index + 1) + ' is satisfied!');
+                rules.value[index].isFulfilled = true; // Set isFulfilled to true for conditional formatting
+                unlockRule(index + 1); // Unlock the rule
+            } else {
+                for (let i = index; i < rules.value.length; i++) {
+                    rules.value[i].isFulfilled = false;
+                }
             }
-        });
-
-        console.log('rule index: ',ruleIndex);
-        const nextIndex = ruleIndex + 1;
-        
-        switch (ruleIndex) {
-            case 1: 
-                checkFirst();
-                break;
-            case 2:
-                checkSecond();
-                break;
-            default: 
-                break;
         }
-    }
+    });
+}
 
-    const checkFirst = () => {
-        const currentRule = rules.value[0];
-        const nextRule = rules.value[1];
-        
-        if (password.value.length >= 7){
-            currentRule.isFulfilled = true;
-            console.log('Rule '+ currentRule.index+'`s fulfillment status: '+ currentRule.isFulfilled);
-            //unlock next index
-            nextRule.isUnlocked = true;
-        }
+    const unlockRule = (index) => {
+        rules.value[index].isUnlocked = true;
     }
-
-    const checkSecond = () => {
-        const currentRule = rules.value[1];
-        const nextRule = rules.value[2];
-        
-        if (/[A-Z]/.test(password.value)) {
-            currentRule.isFulfilled = true;
-            console.log('Rule ' + currentRule.index + '`s fulfillment status: ' + currentRule.isFulfilled);
-            //unlock next index
-            nextRule.isUnlocked = true;
-        }
-    }
-
 </script>
 
 <style>
