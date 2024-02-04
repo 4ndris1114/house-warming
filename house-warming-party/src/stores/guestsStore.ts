@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { collection, getDocs, type CollectionReference, addDoc } from 'firebase/firestore';
 import { Guest } from '@/types/Guest';
 
-export const useGuestStore = defineStore('guest', {
+export const useGuestsStore = defineStore('guests', {
     state: (): any => ({
         guests: [],
     }),

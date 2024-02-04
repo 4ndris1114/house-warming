@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useGuestStore } from '@/stores/guestStore';
+import { useGuestsStore } from '@/stores/guestsStore';
 import type { Guest } from '@/types/Guest';
 
-import { type  ComputedRef, onMounted, computed } from 'vue';
+import { type  ComputedRef, onMounted, computed, ref } from 'vue';
 
 import SignupForm from '@/components/SignupForm.vue';
 
-const guestStore = useGuestStore();
+const guestStore = useGuestsStore();
 
 
 // Fetch guests after the component is mounted
@@ -26,6 +26,7 @@ const guests: ComputedRef<Guest[]> = computed(() => guestStore.guests || []);
     </div>
   </main>
 </template>
+
 
 <style>
 
