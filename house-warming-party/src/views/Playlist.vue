@@ -1,8 +1,27 @@
 <template>
     <div>
+        <h1 class="header-text">Add your favorite songs to our Spotify playlist</h1>
+        <p class="sub-text">Let's make it a collection of bangers!</p>
       <button @click="redirectToPlaylist">Go to Playlist</button>
     </div>
   </template>
+
+<style>
+.header-text {
+  font-size: 2.5em;
+  color: #4285f4; /* Change the color to your preference */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.sub-text {
+  font-size: 1.2em;
+  color: #666;
+  text-align: center;
+  margin-top: 0;
+}
+</style>
   
   <script>
   export default {
