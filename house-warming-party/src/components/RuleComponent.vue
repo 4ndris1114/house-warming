@@ -16,14 +16,23 @@ const props = defineProps({
     }
 })
 
+console.log(props.rule);
+
+
 </script>
 
 <style scoped>
 div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    vertical-align: middle;
     border-style: ridge;
-    margin-top: 0px;
+    margin-top: 0rem;
+    height: 4rem;
 }
 p {
+    width: 40rem;
     background-color: red;
     margin-top: 0px;
     font-weight: bold;

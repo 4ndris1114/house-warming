@@ -5,9 +5,14 @@
             <input @input="checkPassword()" @click="unlockFirst()" v-model="password" type="text">
             <hr>
         </div>
-        <div v-for="(rule, index) in rules" :key="rule.uid">
-            <RuleComponent v-if="index === 0 && rule.isUnlocked" :rule="rules[0]"></RuleComponent>
-            <RuleComponent v-else-if="rule.isUnlocked" :rule="rule"></RuleComponent>
+        <div v-if="newlyUnlockedRule" :key="newlyUnlockedRule.uid">
+          <RuleComponent :rule="newlyUnlockedRule"></RuleComponent>
+        </div>
+        <div v-for="(rule, index) in unlocked" :key="rule.uid">
+          <RuleComponent v-if="index !== 0 && rule.isUnlocked" :rule="rule"></RuleComponent>
+        </div>
+        <div v-for="(rule, index) in unlockedFulfilled" :key="rule.uid">
+              <RuleComponent v-if="index !== 0 && rule.isUnlocked" :rule="rule"></RuleComponent>
         </div>
     </div>
 </template>
@@ -16,7 +21,7 @@
 import RuleComponent from "@/components/RuleComponent.vue"
 import type Rule from '@/types/Rule.vue';
 import {useRulesStore} from "@/stores/rulesStore"
-import { computed, type ComputedRef, onMounted, ref } from 'vue';
+import { computed, type ComputedRef, onMounted, ref, type  Ref } from 'vue';
 
     const rulesStore = useRulesStore();
 
@@ -26,12 +31,32 @@ import { computed, type ComputedRef, onMounted, ref } from 'vue';
 
     const password = ref('');
     const rules: ComputedRef<Rule[]> = computed(() => {
-        console.log(rules.value);
+        console.log('Rules fetched in the component: ', rules.value);
+
         return rulesStore.rules || []
     });
+    const unlocked: ComputedRef<Rule[]> = computed(() => {
+        let dummy = rules.value.filter(rule => rule !== newlyUnlockedRule.value && !rule.isFulfilled);
+        if (rules.value.length !== 0){
+            dummy.push(rules.value[0]);
+        }
+        return dummy.reverse();
+    });
+    const unlockedFulfilled: ComputedRef<Rule[]> = computed(() => {
+    let dummy = rules.value.filter(rule => rule !== newlyUnlockedRule.value && rule.isFulfilled);
+    if (rules.value.length !== 0) {
+        dummy.push(rules.value[0]);
+    }
+    return dummy.reverse();
+});
+    
+    const newlyUnlockedRule: Rule = ref(null);
 
     const unlockFirst = () => {
-        rules.value[0].isUnlocked = true;
+        if (!rules.value[0].isUnlocked) { //is not unlocked already
+            rules.value[0].isUnlocked = true;
+            newlyUnlockedRule.value = rules.value[0];
+        }
     }
 
     const slovakSpecialLettersRegex = /[áäčďéíĺľňóôŕšťúýžÁÄČĎÉÍĹĽŇÓÔŔŠŤÚÝŽ]/;
@@ -73,10 +98,21 @@ import { computed, type ComputedRef, onMounted, ref } from 'vue';
 }
 
     const unlockRule = (index) => {
-        rules.value[index].isUnlocked = true;
+        const newlyUnlockedRuleValue = rules.value[index];
+        newlyUnlockedRule.value = newlyUnlockedRuleValue;
+        newlyUnlockedRuleValue.isUnlocked = true;
+        //rules.value[index].isUnlocked = true;
     }
 </script>
 
-<style>
-
+<style scoped>
+    label {
+        font-weight: bold;
+    }
+    div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 39.9rem;
+    }
 </style>
