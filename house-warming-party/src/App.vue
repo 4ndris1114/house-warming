@@ -1,15 +1,5 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
   <header>
-<<<<<<< Updated upstream
-      <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav> -->
-=======
     <div v-if="isDefaultRoute" class="countdown-frame">
       <div class="countdown">
         <h1>Countdown Timer</h1>
@@ -23,20 +13,61 @@ import { RouterLink, RouterView } from 'vue-router'
       <router-link to="/playlist" class="cool-button">Playlist</router-link>
       <router-link to="/password-game" class="cool-button">Change password</router-link>
       <router-link to="/map" class="cool-button">Address</router-link>
+      <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
     </div>
->>>>>>> Stashed changes
   </header>
   <router-view />
 </template>
 
-<style scoped>
-<<<<<<< Updated upstream
+<script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-=======
+const endDateTime = new Date('2024-02-17T17:00:00').getTime(); // End date and time in milliseconds
+const remainingTime = ref(0);
+let timer: ReturnType<typeof setInterval> | null = null;
+
+const calculateRemainingTime = () => {
+  const currentTime = new Date().getTime(); // Current time in milliseconds
+  remainingTime.value = Math.max(Math.floor((endDateTime - currentTime) / 1000), 0); // Calculate remaining time in seconds
+};
+
+const startCountdown = () => {
+  timer = setInterval(() => {
+    if (remainingTime.value > 0) {
+      remainingTime.value--;
+    } else {
+      clearInterval(timer!);
+    }
+  }, 1000);
+};
+
+onMounted(() => {
+  calculateRemainingTime();
+  startCountdown();
+});
+
+onBeforeUnmount(() => {
+  if (timer) clearInterval(timer);
+});
+
+const route = useRoute();
+const isDefaultRoute = computed(() => route.path === '/');
+
+const remainingTimeString = computed(() => {
+  const days = Math.floor(remainingTime.value / (60 * 60 * 24));
+  const hours = Math.floor((remainingTime.value % (60 * 60 * 24)) / (60 * 60));
+  const minutes = Math.floor((remainingTime.value % (60 * 60)) / 60);
+  const seconds = remainingTime.value % 60;
+  return `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+});
+</script>
+
+<style scoped>
 .countdown-frame {
   padding: 20px;
-  background-color: #f0f0f0;
-  border-radius: 5px;
+  background-color: #95deff;
+  border-radius: 10px;
   margin-top: 20px;
   text-align: center; /* Center the content horizontally */
 }
@@ -48,7 +79,7 @@ import { RouterLink, RouterView } from 'vue-router'
 .menu {
   display: flex;
   flex-direction: column; /* Stack buttons vertically */
-  align-items: center; /* Center the buttons horizontally */
+  align-items: center; /* Center buttons horizontally */
 }
 
 .menu a {
@@ -62,14 +93,14 @@ import { RouterLink, RouterView } from 'vue-router'
   border: 2px solid #26BB98; /* Add black border */
   color: #26BB98;
   background-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 10px;
+  width: 140px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .menu a:hover {
   background-color: #26BB98;
   color: white;
-  border-color: white;
+  border-color: #26BB98;
 }
->>>>>>> Stashed changes
 </style>
