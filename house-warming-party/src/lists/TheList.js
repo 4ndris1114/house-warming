@@ -1,0 +1,78 @@
+export const capitals = [
+    'Tirana',
+    'Andorra la Vella',
+    'Yerevan',
+    'Vienna',
+    'Baku',
+    'Minsk',
+    'Brussels',
+    'Sarajevo',
+    'Sofia',
+    'Zagreb',
+    'Nicosia',
+    'Prague',
+    'Copenhagen',
+    'Tallinn',
+    'Helsinki',
+    'Paris',
+    'Tbilisi',
+    'Berlin',
+    'Athens',
+    'Budapest',
+    'Reykjavik',
+    'Dublin',
+    'Rome',
+    'Astana',
+    'Pristina',
+    'Riga',
+    'Vaduz',
+    'Vilnius',
+    'Luxembourg (city)',
+    'Valletta',
+    'Chisinau',
+    'Monaco',
+    'Podgorica',
+    'Amsterdam',
+    'Skopje',
+    'Oslo',
+    'Warsaw',
+    'Lisbon',
+    'Bucharest',
+    'Moscow',
+    'San Marino',
+    'Belgrade',
+    'Bratislava',
+    'Ljubljana',
+    'Madrid',
+    'Stockholm',
+    'Bern',
+    'Ankara',
+    'Kyiv (also known as Kiev)',
+    'London',
+    'Vatican City'
+];
+
+export const hungarianAnthem = [
+    "Isten,álddmegamagyart",
+    "Jó kedvvel,bőséggel,",
+    "Nyújtsfeléjevédőkart,",
+    "Haküzdellenséggel;",
+    "Balsorsakitrégentép,",
+    "Hozzrávígesztendőt,",
+    "Megbünhödtemárenép",
+    "Amultatsjövendőt!"
+];
+
+export const planets = [
+    'Mercury',
+    'Venus',
+    'Earth',
+    'Mars',
+    'Jupiter',
+    'Saturn',
+    'Uranus',
+    'Neptune'
+];
+
+// my little test password:
+// Budapest7/2/2024Isten,álddmegamagyart1MercuryHangar36700a2+b2=c2

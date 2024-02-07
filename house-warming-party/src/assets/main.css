@@ -12,3 +12,15 @@ h1 {
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+    padding: 0 2rem;
+  }
+}
