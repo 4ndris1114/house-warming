@@ -43,7 +43,6 @@ div {
 
 .fulfilled {
     width: 40rem;
-    background-color: red;
     margin-top: 0px;
     font-weight: bold;
     text-align: center;
@@ -58,7 +57,6 @@ div {
     margin-top: 0px;
     font-weight: bold;
     text-align: center;
-    background-color: red;
     border-top-right-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
 }

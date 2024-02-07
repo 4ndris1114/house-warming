@@ -196,19 +196,18 @@ import {planets} from "@/lists/TheList"
 };
 </script>
 
-<style scoped>
+<style>
+@import '@/assets/main.css';
+
 .page {
   display: flex;
   flex-direction: column;
-  height: 50rem; /* Make the page take up the full height of the viewport */
+  justify-content: center;
 }
 .content {
   flex-grow: 1; /* Allow the content to take up the remaining vertical space */
 }
 
-    label {
-        font-weight: bold;
-    }
     .wrapper {
         display: flex;
         flex-direction: column;
