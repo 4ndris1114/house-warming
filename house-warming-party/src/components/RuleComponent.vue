@@ -15,10 +15,6 @@ const props = defineProps({
         required: true
     }
 })
-
-console.log(props.rule);
-
-
 </script>
 
 <style scoped>

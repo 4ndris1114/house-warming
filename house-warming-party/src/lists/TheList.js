@@ -75,4 +75,4 @@ export const planets = [
 ];
 
 // my little test password:
-// Budapest2/6/2024Isten,álddmegamagyart86Mercury
+// Budapest7/2/2024Isten,álddmegamagyart1MercuryHangar36700a2+b2=c2
