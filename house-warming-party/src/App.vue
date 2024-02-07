@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { RouterLink, RouterView, useRoute } from 'vue-router';
 
 const endDateTime = new Date('2024-02-17T17:00:00').getTime(); // End date and time in milliseconds
 const remainingTime = ref(0);
