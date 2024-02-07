@@ -202,7 +202,7 @@ import {planets} from "@/lists/TheList"
 .page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 35rem;
 }
 .content {
   flex-grow: 1; /* Allow the content to take up the remaining vertical space */
