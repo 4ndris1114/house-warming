@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="header-text">Add your favorite songs to our Spotify playlist</h1>
+    <h1 class="header-text" style="color: #052240;">Add your favorite songs to our Spotify playlist</h1>
     <p class="sub-text">Let's make it a collection of bangers!</p>
     <button class="cool-button" @click="redirectToPlaylist">Go to Playlist</button>
     
@@ -77,16 +77,16 @@ export default {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid #26BB98;
-  color: #26BB98;
+  border: 2px solid #BE3455;
+  color: #BE3455;
   background-color: #ffffff;
-  border-radius: 5px;
+  border-radius: 30px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .cool-button:hover {
-  background-color: #26BB98;
+  background-color: #BE3455;
   color: #ffffff;
-  border-color: #ffffff;
+  border-color: #BE3455;
 }
 </style>

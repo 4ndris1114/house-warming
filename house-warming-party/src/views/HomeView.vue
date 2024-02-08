@@ -3,10 +3,10 @@
     <div v-if="isDefaultRoute" class="countdown-frame">
       <div class="countdown">
         <h1>Countdown Timer</h1>
-        <p v-if="remainingTime > 0">Time Remaining: {{ remainingTimeString }}</p>
+        <p v-if="remainingTime > 0" style="color: white;">Time Remaining: {{ remainingTimeString }}</p>
         <p v-else>The countdown has ended!</p>
       </div>
-    </div>
+    
     <div class="menu">
       <RouterLink to="/guest-list" class="cool-button">Guest list</RouterLink>
       <router-link to="/requirements" class="cool-button">Requirements</router-link>
@@ -15,6 +15,7 @@
       <router-link to="/map" class="cool-button">Address</router-link>
       <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
     </div>
+  </div>
   </header>
   <router-view />
 </template>
@@ -66,8 +67,9 @@ const remainingTimeString = computed(() => {
 <style scoped>
 .countdown-frame {
   padding: 20px;
-  background-color: #95deff;
-  border-radius: 10px;
+  background-color: #004b6b;
+  border: 20px solid #BE3455;
+  border-radius: 30px;
   margin-top: 20px;
   text-align: center;
   /* Center the content horizontally */
@@ -90,21 +92,25 @@ const remainingTimeString = computed(() => {
   padding: 12px 24px;
   /* Adjust button padding */
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 800;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid #26BB98;
+  border: 2px solid #BE3455;
   /* Add black border */
-  color: #26BB98;
+  color: #BE3455;
   background-color: #ffffff;
-  border-radius: 10px;
+  border-radius: 30px;
   width: 140px;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .menu a:hover {
-  background-color: #26BB98;
+  background-color: #BE3455;
   color: white;
-  border-color: #26BB98;
-}</style>
+}
+
+a.cool-button {
+  font-weight: 900;
+}
+</style>

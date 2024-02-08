@@ -46,14 +46,14 @@ div {
     margin-top: 0px;
     font-weight: bold;
     text-align: center;
-    background-color: #27ae60;
+    background-color:  #32b141;
     border-top-right-radius: 0.5rem;
     border-top-left-radius: 0.5rem;
 }
 
 .notFulfilled {
     width: 40rem;
-    background-color: red;
+    background-color: #e60203;
     margin-top: 0px;
     font-weight: bold;
     text-align: center;
