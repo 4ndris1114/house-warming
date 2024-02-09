@@ -69,24 +69,5 @@ export default {
   margin-top: 0;
 }
 
-.cool-button {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border: 2px solid #BE3455;
-  color: #BE3455;
-  background-color: #ffffff;
-  border-radius: 30px;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
 
-.cool-button:hover {
-  background-color: #BE3455;
-  color: #ffffff;
-  border-color: #BE3455;
-}
 </style>
