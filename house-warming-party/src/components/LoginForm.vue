@@ -9,8 +9,11 @@
             <label for="password">Password:</label>
             <input v-model="guest.password" type="password" id="password" name="password" placeholder="Your Password" required>
         </div>
-        <button @click="login">Login</button>
-        <div v-if="loginAttempted && !isLoginValid" class="error-message">Invalid email or password</div>
+        <div class="button-container">
+            <button @click="login" class="cool-button">Login</button>
+            <div v-if="loginAttempted && !isLoginValid" class="error-message">Invalid email or password</div>
+        </div>
+
     </div>
 </template>
 
@@ -78,23 +81,9 @@ input[type="password"] {
     box-sizing: border-box;
 }
 
-.login-form button {
-    width: 100%;
-    padding: 0.9rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bolder;
-}
-
-.login-form button:hover {
-    background-color: #0056b3;
-}
-
-button:hover {
-    background-color: #0056b3;
+.button-container {
+    display: flex;
+    justify-content: center;
 }
 
 .error-message {

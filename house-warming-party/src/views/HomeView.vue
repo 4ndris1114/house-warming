@@ -1,4 +1,9 @@
 <template>
+  <div v-if="!isLoggedIn">
+    <RouterLink to="/login" class="cool-button">Login</RouterLink>
+        <router-link to="/signup" class="cool-button">Sign up</router-link>
+  </div>
+  <div v-else>
     <div v-if="isDefaultRoute" class="countdown-frame">
       <div class="countdown">
         <h1>Countdown Timer</h1>
@@ -6,13 +11,14 @@
         <p v-else>The countdown has ended!</p>
       </div>
     
-    <div class="menu">
+      <div class="menu">
       <RouterLink to="/guest-list" class="cool-button">Guest list</RouterLink>
       <router-link to="/requirements" class="cool-button">Requirements</router-link>
       <router-link to="/playlist" class="cool-button">Playlist</router-link>
       <router-link to="/password-game" class="cool-button">Change password</router-link>
       <router-link to="/map" class="cool-button">Address</router-link>
       <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
+      </div>
     </div>
   </div>
   <router-view />
@@ -21,6 +27,15 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
+import { useGuestsStore } from '@/stores/guestsStore';
+
+const guestsStore = useGuestsStore();
+
+const isLoggedIn = computed(() => {
+  console.log('Logged in as '+ guestsStore.loggedInGuest);
+  
+  return guestsStore.loggedInGuest;
+})
 
 const endDateTime = new Date('2024-02-17T17:00:00').getTime(); // End date and time in milliseconds
 const remainingTime = ref(0);
@@ -109,6 +124,9 @@ const remainingTimeString = computed(() => {
 }
 
 a.cool-button {
-  font-weight: 900;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 20px 40px;
+  font-size: 24px;
 }
 </style>

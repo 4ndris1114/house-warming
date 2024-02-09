@@ -18,9 +18,10 @@
 
                 <label for="isSleepingHere" class="checkbox-label">I would like to sleep there!</label>
             </div>
-
-            <button @click="registerGuest">Register</button>
-            <div v-if="registerAttempted && !isEmailUnique" class="error-message">You are already registered! <a href="/login">Go to login</a></div>
+            <div class="button-container">
+                <button @click="registerGuest" class="cool-button">Register</button>
+                <div v-if="registerAttempted && !isEmailUnique" class="error-message">You are already registered! <a href="/login">Go to login</a></div>
+            </div>
         </div>
     </div>
 </template> 
@@ -100,21 +101,6 @@ body {
     box-sizing: border-box;
 }
 
-.signup-form button {
-    width: 100%;
-    padding: 0.9rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    font-weight: bolder;
-}
-
-.signup-form button:hover {
-    background-color: #0056b3;
-}
-
 .error-message {
     color: red;
     font-size: 0.8rem;
@@ -124,6 +110,11 @@ body {
 
 .signup-form input .invalid {
     border: 0.0625rem solid red;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
 }
 
 /* checkbox */
