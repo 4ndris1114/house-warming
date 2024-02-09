@@ -118,7 +118,7 @@ const remainingTimeString = computed(() => {
   color: #BE3455;
   background-color: #ffffff;
   border-radius: 5vw;
-  width:10vw; /* Set width to auto */
+  width:15vw; /* Set width to auto */
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
