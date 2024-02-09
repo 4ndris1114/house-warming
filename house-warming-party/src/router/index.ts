@@ -61,7 +61,7 @@ router.beforeEach(async (to, from, next) => {
   } else {
     // If the user is not logged in and the requested route is NOT the login/signup route,
     // redirect to the login/signup route to prevent infinite redirection loop
-    if (to.path !== '/login-signup') {
+    if (to.path !== '/login-signup' && to.path !== '/login' && to.path !== '/signup') {
       next('/login-signup');
     } else {
       // If the requested route is already the login/signup route, allow navigation

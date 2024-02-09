@@ -18,9 +18,14 @@
 
                 <label for="isSleepingHere" class="checkbox-label">I would like to sleep there!</label>
             </div>
+            <label class="animalSelect" for="animalSelect">Select an animal you fancy the most!</label>
+            <select class="animalSelect" v-model="selectedAnimal" required>
+                <option disabled value="">Please select an animal</option>
+                <option v-for="animal in animals" :key="animal">{{ animal }}</option>
+            </select>
             <div class="button-container">
                 <button @click="registerGuest" class="cool-button">Register</button>
-                <div v-if="registerAttempted && !isEmailUnique" class="error-message">You are already registered! <a href="/login">Go to login</a></div>
+                <div v-if="registerAttempted && !isEmailUnique && isEmailValid && isNameValid && selectedAnimal !== ''" class="error-message">You are already registered! <a href="/login">Go to login</a></div>
             </div>
         </div>
     </div>
@@ -32,33 +37,48 @@ import { computed, onMounted, ref } from 'vue';
 
 onMounted(() => {
     guestsStore.fetchGuests();
-})
+});
 
 const guestsStore = useGuestsStore();
 const guestList = computed(() => {
     return guestsStore.guests;
-})
+});
 
-const newGuest = ref({ name: '', email: '', isSleepingHere: false });
+const newGuest = ref({ name: '', email: '', isSleepingHere: false, animalRef: '' });
 const isNameValid = computed(() => {
     return newGuest.value.name.trim() !== '' && newGuest.value.name.trim().length > 5;
-})
+});
 const isEmailValid = computed(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(newGuest.value.email);
-})
+});
 const isEmailUnique = computed(() => {
-    return guestList.value.includes(newGuest.value.email)
-})
+    return !guestList.value.some(guest => guest.email === newGuest.value.email);
+});
 const registerAttempted = ref(false);
+
+const selectedAnimal = ref('');
+const animals: string[] = [
+    'Alpaca', 'Cat', 'Chimpanzee', 'Deer', 'Dog',
+    'Eagle', 'Elephant', 'Flamingo', 'Giraffe',
+    'Goat', 'Hen', 'Horse', 'Lion', 'Owl', 'Parrot',
+    'Rabbit', 'Rhinoceros', 'Squirrel', 'Tiger'
+];
+
+const getAnimalImageUrl = (animal: string) => {
+    return `./assets/animals/${animal.toLowerCase()}.jpg`;
+}
 
 const registerGuest = () => {
     registerAttempted.value = true;
+    console.log(newGuest.value);
     
     if (isNameValid.value && isEmailValid.value) {
-        
         if (!isEmailUnique.value){
-            return false;
+            return;
+        }
+        if (selectedAnimal.value !== ''){
+            newGuest.value.animalRef = getAnimalImageUrl(selectedAnimal.value);
         }
 
         console.log("Calling GuestStore to add guest: ", newGuest);
@@ -105,7 +125,7 @@ body {
     color: red;
     font-size: 0.8rem;
     display: block;
-    margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 
 .signup-form input .invalid {
@@ -115,6 +135,14 @@ body {
 .button-container {
     display: flex;
     justify-content: center;
+}
+
+.animalSelect {
+    margin-top: 0.5rem;
+}
+
+.cool-button {
+    margin-top: 1rem;
 }
 
 /* checkbox */
