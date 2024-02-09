@@ -1,29 +1,33 @@
 <template>
     <div class="page">
         <div class="content">
-    <div class="wrapper">
-        <div class="passwordInput">
-            <label>Choose a password</label>
-            <textarea @input="checkPassword()" @click="unlockFirst()" v-model="password" type="text"> </textarea>
-        </div>
-        <div class="rulesContainer">
-            <div v-if="newlyUnlockedRule" :key="newlyUnlockedRule.uid">
-                <RuleComponent :rule="newlyUnlockedRule"></RuleComponent>
-            </div>
-            <div v-for="(rule, index) in unlocked" :key="rule.uid">
-                <RuleComponent v-if="index !== 0 && rule.isUnlocked" :rule="rule"></RuleComponent>
-            </div>
-            <div v-for="(rule, index) in unlockedFulfilled" :key="rule.uid">
-                <RuleComponent v-if="index !== 0 && rule.isUnlocked" :rule="rule"></RuleComponent>
+            <div class="wrapper">
+                <div v-if="!gameEnded" class="passwordInput">
+                    <label>Choose a password</label>
+                    <textarea @input="checkPassword()" @click="unlockFirst()" v-model="password" type="text"> </textarea>
+                </div>
+                <div v-else class="gameEnded-box">
+                    <PasswordEndGame :password="password"></PasswordEndGame>
+                </div>
+                <div class="rulesContainer">
+                    <div v-if="newlyUnlockedRule" :key="newlyUnlockedRule.uid">
+                        <RuleComponent :rule="newlyUnlockedRule"></RuleComponent>
+                    </div>
+                    <div v-for="(rule, index) in unlocked" :key="rule.uid">
+                        <RuleComponent v-if="index !== 0 && rule.isUnlocked" :rule="rule"></RuleComponent>
+                    </div>
+                    <div v-for="(rule, index) in unlockedFulfilled" :key="rule.uid">
+                        <RuleComponent v-if="index !== 0 && rule.isUnlocked" :rule="rule"></RuleComponent>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-          </div>
 </template>
 
 <script setup lang="ts">
-import RuleComponent from "@/components/RuleComponent.vue"
+import RuleComponent from "@/components/RuleComponent.vue";
+import PasswordEndGame from "@/components/PasswordEndGame.vue";
 import type Rule from '@/types/Rule.vue';
 import {useRulesStore} from "@/stores/rulesStore"
 import { computed, type ComputedRef, onMounted, ref } from 'vue';
@@ -40,6 +44,7 @@ import {planets} from "@/lists/TheList"
     });
 
     const password = ref('');
+    const gameEnded = ref(false);
 
     const rules: ComputedRef<Rule[]> = computed(() => {
         return rulesStore.rules || [];
@@ -97,7 +102,8 @@ import {planets} from "@/lists/TheList"
     async () => {
         const response = await validatePalindrome();
         return response === 200;
-    }
+    },
+    (password: string) => password.includes("Andras") && password.includes("Katie")
     ];
 
     const validatePalindrome = async (): Promise<number> => {
@@ -135,6 +141,9 @@ import {planets} from "@/lists/TheList"
                         // Either the substring is not a valid palindrome or not an English word
                         rules.value[index].isFulfilled = false;
                     }
+                }
+                if (rules.value[15].isFulfilled === true) {
+                    gameEnded.value = true;
                 }
                 unlockRule(index + 1); // Unlock the rule
             } else {
@@ -218,6 +227,15 @@ import {planets} from "@/lists/TheList"
         width: 50rem;
         border-color: #000000;
         overflow-y: auto; /* Enable vertical scrolling */
+    }
+
+    .gameEnded-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem;
+        width: 40rem;
+        border-color: #000000;
     }
 
     .rulesContainer > div {

@@ -75,4 +75,4 @@ export const planets = [
 ];
 
 // my little test password:
-// Budapest7/2/2024Isten,álddmegamagyart1MercuryHangar36700a2+b2=c2
+// Budapest9/2/2024Isten,álddmegamagyart1MercuryHangar16700a2+b2=c2|kayak|AndrasKatie
