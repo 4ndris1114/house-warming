@@ -18,23 +18,44 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import {useGuestsStore} from '@/stores/guestsStore';
+
+onMounted(() => {
+    guestsStore.fetchGuests();
+});
+
+const guestsStore = useGuestsStore();
 
 const guest = ref({ email: '', password: ''});
+const loggedInGuest = ref(null);
 
 const loginAttempted = ref(false);
 
-const isLoginValid = computed(() => {
-    return guest.value.email === 'example@example.com' && guest.value.password === 'password';
+const guestList = computed(() => {
+    return guestsStore.guests;
 });
 
-const login = () => {
+const isLoginValid = () => {
+    let isValid = false;
+    guestList.value.forEach(guestFromList => {
+        if (guestFromList.email === guest.value.email && guestFromList.password === guest.value.password) {
+            loggedInGuest.value = guestFromList;
+            isValid = true;
+        }
+    });
+    
+    return isValid;
+}
+
+const login = async () => {
     loginAttempted.value = true;
-    if (isLoginValid.value) {
-        // Successful login logic
+    if (isLoginValid()) {
         console.log('Login successful');
+        await guestsStore.setLoggedInGuest(loggedInGuest.value);
+        console.log('Logged in user:', guestsStore.loggedInGuest);
+        window.location.href = "/";
     } else {
-        // Failed login logic
         console.log('Login failed');
     }
 }

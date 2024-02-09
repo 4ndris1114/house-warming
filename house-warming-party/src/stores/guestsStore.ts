@@ -6,7 +6,7 @@ import { Guest } from '@/types/Guest';
 
 export const useGuestsStore = defineStore('guests', {
     state: (): any => ({
-        loggedInGuest: null || undefined,
+        loggedInGuest: null,
         guests: [],
     }),
     getters: {
@@ -40,6 +40,17 @@ export const useGuestsStore = defineStore('guests', {
             } catch (error) {
                 console.log("Error adding guest: ",error.message);
             }
+        },
+        async setLoggedInGuest(guest: Guest) {
+            this.loggedInGuest = guest;
+            localStorage.setItem('loggedInUser', JSON.stringify(guest));
+            
+            return this.loggedInGuest;
+        },
+        async logout(){
+            localStorage.setItem('loggedInUser', JSON.stringify(null));
+            this.setLoggedInGuest(null);
+            
         }
     }
 })

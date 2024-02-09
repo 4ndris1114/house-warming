@@ -44,7 +44,7 @@ const guestList = computed(() => {
     return guestsStore.guests;
 });
 
-const newGuest = ref({ name: '', email: '', isSleepingHere: false, animalRef: '' });
+const newGuest = ref({ name: '', email: '', password: 'banana', isSleepingHere: false, animalRef: '' });
 const isNameValid = computed(() => {
     return newGuest.value.name.trim() !== '' && newGuest.value.name.trim().length > 5;
 });
@@ -71,7 +71,6 @@ const getAnimalImageUrl = (animal: string) => {
 
 const registerGuest = () => {
     registerAttempted.value = true;
-    console.log(newGuest.value);
     
     if (isNameValid.value && isEmailValid.value) {
         if (!isEmailUnique.value){
@@ -80,7 +79,6 @@ const registerGuest = () => {
         if (selectedAnimal.value !== ''){
             newGuest.value.animalRef = getAnimalImageUrl(selectedAnimal.value);
         }
-
         console.log("Calling GuestStore to add guest: ", newGuest);
         guestsStore.addGuest(newGuest.value);
         window.alert("You're now registered!\nYour initial password is: banana");
