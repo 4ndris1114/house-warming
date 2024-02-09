@@ -1,9 +1,5 @@
 <template>
-  <div v-if="!isLoggedIn">
-    <RouterLink to="/login" class="cool-button">Login</RouterLink>
-        <router-link to="/signup" class="cool-button">Sign up</router-link>
-  </div>
-  <div v-else>
+  <div>
     <div v-if="isDefaultRoute" class="countdown-frame">
       <div class="countdown">
         <h1>Countdown Timer</h1>
@@ -27,15 +23,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
-import { useGuestsStore } from '@/stores/guestsStore';
-
-const guestsStore = useGuestsStore();
-
-const isLoggedIn = computed(() => {
-  console.log('Logged in as '+ guestsStore.loggedInGuest);
-  
-  return guestsStore.loggedInGuest;
-})
 
 const endDateTime = new Date('2024-02-17T17:00:00').getTime(); // End date and time in milliseconds
 const remainingTime = ref(0);
@@ -121,12 +108,5 @@ const remainingTimeString = computed(() => {
 .menu a:hover {
   background-color: #BE3455;
   color: white;
-}
-
-a.cool-button {
-  margin-left: 1rem;
-  margin-right: 1rem;
-  padding: 20px 40px;
-  font-size: 24px;
 }
 </style>

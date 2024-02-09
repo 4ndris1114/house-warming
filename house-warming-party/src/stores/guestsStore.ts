@@ -6,6 +6,7 @@ import { Guest } from '@/types/Guest';
 
 export const useGuestsStore = defineStore('guests', {
     state: (): any => ({
+        loggedInGuest: null || undefined,
         guests: [],
     }),
     getters: {
