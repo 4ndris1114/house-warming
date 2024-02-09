@@ -1,5 +1,4 @@
 <template>
-  <header>
     <div v-if="isDefaultRoute" class="countdown-frame">
       <div class="countdown">
         <h1>Countdown Timer</h1>
@@ -16,7 +15,6 @@
       <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
     </div>
   </div>
-  </header>
   <router-view />
 </template>
 

@@ -20,15 +20,23 @@
             </div>
 
             <button @click="registerGuest">Register</button>
+            <div v-if="registerAttempted && !isEmailUnique" class="error-message">You are already registered! <a href="/login">Go to login</a></div>
         </div>
     </div>
 </template> 
 
 <script setup lang="ts">
 import { useGuestsStore } from '@/stores/guestsStore';
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+
+onMounted(() => {
+    guestsStore.fetchGuests();
+})
 
 const guestsStore = useGuestsStore();
+const guestList = computed(() => {
+    return guestsStore.guests;
+})
 
 const newGuest = ref({ name: '', email: '', isSleepingHere: false });
 const isNameValid = computed(() => {
@@ -38,14 +46,23 @@ const isEmailValid = computed(() => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(newGuest.value.email);
 })
+const isEmailUnique = computed(() => {
+    return guestList.value.includes(newGuest.value.email)
+})
 const registerAttempted = ref(false);
 
 const registerGuest = () => {
     registerAttempted.value = true;
     
     if (isNameValid.value && isEmailValid.value) {
+        
+        if (!isEmailUnique.value){
+            return false;
+        }
+
         console.log("Calling GuestStore to add guest: ", newGuest);
         guestsStore.addGuest(newGuest.value);
+        window.alert("You're now registered!\nYour initial password is: banana");
     }
 }
 </script>
@@ -62,14 +79,14 @@ body {
 
 .signup-form {
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 300px;
+    padding: 1.25rem;
+    width: 20rem;
 }
 
 .signup-form h2 {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     text-align: center;
 }
 
@@ -77,14 +94,10 @@ body {
 .signup-form input[type="email"]{
     width: 100%;
     padding: 0.9rem;
-    margin-bottom: 0.9rem;
+    margin-top: 0.5rem;
     border: 0.0625rem  solid #ccc; /* 1px */
     border-radius: 0.5rem;
     box-sizing: border-box;
-}
-
-.error-message-name {
-    margin-bottom: 10rem;
 }
 
 .signup-form button {
@@ -105,19 +118,19 @@ body {
 .error-message {
     color: red;
     font-size: 0.8rem;
-    margin-top: -0.5rem;
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .signup-form input .invalid {
     border: 0.0625rem solid red;
-  }
+}
 
 /* checkbox */
   .checkbox-container {
     display: flex;
     align-items: center;
+    margin-top: 1rem;
     margin-bottom: 1rem;
   }
 
