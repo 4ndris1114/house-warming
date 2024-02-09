@@ -1,6 +1,7 @@
 <template>
-  <header>
+  <div>
     <div v-if="isDefaultRoute" class="countdown-frame">
+      <!-- Login Panel -->
       <div class="countdown">
         <h1>Countdown Timer</h1>
         <p v-if="remainingTime > 0" style="color: white;">Time Remaining: {{ remainingTimeString }}</p>
@@ -8,21 +9,41 @@
       </div>
     
       <div class="menu">
-        <RouterLink to="/guest-list" class="cool-button">Guest list</RouterLink>
-        <router-link to="/requirements" class="cool-button">Requirements</router-link>
-        <router-link to="/playlist" class="cool-button">Playlist</router-link>
-        <router-link to="/password-game" class="cool-button">Change password</router-link>
-        <router-link to="/map" class="cool-button">Address</router-link>
-        <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
+      <RouterLink to="/guest-list" class="cool-button">Guest list</RouterLink>
+      <router-link to="/requirements" class="cool-button">Requirements</router-link>
+      <router-link to="/playlist" class="cool-button">Playlist</router-link>
+      <router-link to="/password-game" class="cool-button">Change password</router-link>
+      <router-link to="/map" class="cool-button">Address</router-link>
+      <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
       </div>
     </div>
-  </header>
+    <div class="loginPanel">
+            <div v-if="loggedInUser" class="logged-in-info">
+              Logged in as: {{ loggedInUser.email }}
+            </div>
+            <button v-if="loggedInUser" @click="logout" class="logout-button">Log out</button>
+          </div>
+  </div>
   <router-view />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router';
+import { useGuestsStore } from '../stores/guestsStore';
+
+//-----------login--------------
+const guestsStore = useGuestsStore();
+
+const loggedInUser = guestsStore.loggedInGuest;
+
+const logout = () => {
+  // Call the logout action in the auth store
+  guestsStore.logout();
+  window.location.href = "/login";
+};
+
+//-----------countdown-----------
 
 const endDateTime = new Date('2024-02-17T17:00:00').getTime(); // End date and time in milliseconds
 const remainingTime = ref(0);
@@ -68,8 +89,9 @@ const remainingTimeString = computed(() => {
 .countdown-frame {
   padding: 1vw;
   background-color: #004b6b;
-  border: 2vw solid #BE3455;
-  border-radius: 5vw;
+  border: 1.25rem solid #BE3455;
+  border-radius: 2rem;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -105,7 +127,43 @@ const remainingTimeString = computed(() => {
   color: white;
 }
 
-a.cool-button {
-  font-weight: 900;
+/* LOGIN INFO */
+.loginPanel {
+  margin-top: -2.25rem;
+  padding: 0.3rem;
+  background-color: #ffffff;
+  border-top: 0.5rem solid #BE3455;
+  border-bottom: 1.25rem solid #BE3455;
+  border-left: 1.25rem solid #BE3455;
+  border-right: 1.25rem solid #BE3455;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  text-align: center;
+}
+
+.logged-in-info {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.logout-button {
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #004b6b;
+  color: #ffffff;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.5s, color 0.5s;
+}
+
+.logout-button:hover {
+  background-color: #ffffff;
+  color: #BE3455;
 }
 </style>
