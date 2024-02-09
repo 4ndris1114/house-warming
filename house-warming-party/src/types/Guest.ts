@@ -20,7 +20,7 @@ export class Guest {
         return guest;
     }
 
-    toJson() {
+    public toJson() {
         const json: any = {
             name: this.name,
             email: this.email,
