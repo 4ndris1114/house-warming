@@ -1,4 +1,11 @@
 {
+    "compilerOptions": {
+      "target": "ES5",
+      "module": "CommonJS",
+      "outDir": "out",
+      "allowJs": true,
+      "noImplicitAny": false,
+    },
   "files": [],
   "references": [
     {
