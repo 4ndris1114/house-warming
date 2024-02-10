@@ -15,7 +15,8 @@ export const useRequirementsStore = defineStore('requirements', {
     actions: {
         async fetchRequirements() {
             console.log("Starting to fetch requirements list...");
-                const requirementsSnap = await getDocs(this.requirementsRef);
+                const requirementsQuery = query(this.requirementsRef, orderBy("index", "asc"));
+                const requirementsSnap = await getDocs(requirementsQuery);
                 const requirements: Requirement[] = requirementsSnap.docs.map((doc) => Requirement.fromDocumentSnapshot(doc));
                 console.log("Fetched requirements: ", requirements);
                 

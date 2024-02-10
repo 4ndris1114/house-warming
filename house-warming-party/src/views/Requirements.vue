@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div v-for="requirement in reqirements" :key="requirement.uid">
+  <div v-for="requirement in requirements" :key="requirement.uid">
         {{ requirement.text }}
       </div>
 </template>
@@ -29,8 +29,8 @@ const requirementsStore = useRequirementsStore();
 const requirementInput = ref<string>("");
 const showErrorMessage = ref(false);
 
-const reqirements = computed(() => {
-  return requirementsStore.requirements;
+const requirements = computed(() => {
+  return requirementsStore.requirements.slice().reverse();
 });
 
 const resetErrorMessage = () => {
@@ -39,7 +39,7 @@ const resetErrorMessage = () => {
 
 const submitRequirements = () => {
   if (requirementInput.value.length <= 200 && requirementInput.value.length > 0) {
-    requirementsStore.addRequirement({ text: requirementInput.value } as Requirement);
+    requirementsStore.addRequirement({ index: requirements.value.length, text: requirementInput.value } as Requirement);
     requirementInput.value = "";
   } else {
     showErrorMessage.value = true;
