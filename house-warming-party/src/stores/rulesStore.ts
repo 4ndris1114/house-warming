@@ -18,7 +18,7 @@ export const useRulesStore = defineStore('rules', {
             const rulesQuery = query(this.rulesRef, orderBy("index", "asc"));
             const rulesSnap = await getDocs(rulesQuery);
             const rules: Rule[] = rulesSnap.docs.map((doc) => Rule.fromDocumentSnapshot(doc));
-            console.log("Fetched rules: ", rules);
+            // console.log("Fetched rules: ", rules);
 
             this.rules = rules;
             console.log("Storing rules fetched from database...");

@@ -43,7 +43,7 @@ const guests = computed(() => {
 }
 
 /* Additional styles for mobile view */
-@media (max-width: 768px) {
+@media (max-width: 910px) {
     .card-container {
         flex-direction: column;
         align-items: center;

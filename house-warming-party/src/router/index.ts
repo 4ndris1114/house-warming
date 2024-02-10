@@ -60,7 +60,7 @@ router.beforeEach(async (to, from, next) => {
   const guestsStore = useGuestsStore();
   await guestsStore.$state.loaded;
 
-  console.log("Logged in as: ", guestsStore.loggedInGuest);
+  // console.log("Logged in as: ", guestsStore.loggedInGuest);
   
   if (guestsStore.loggedInGuest !== null && guestsStore.loggedInGuest !== undefined) {
     next();

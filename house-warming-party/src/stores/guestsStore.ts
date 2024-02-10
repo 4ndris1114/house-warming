@@ -19,7 +19,7 @@ export const useGuestsStore = defineStore('guests', {
             console.log("Starting to fetch guest list...");
             const guestSnap = await getDocs(this.guestsRef);
             const guests: Guest[] = guestSnap.docs.map((doc) => Guest.fromDocumentSnapshot(doc));
-            console.log("Fetched guests: ", guests);
+            // console.log("Fetched guests: ", guests);
             
             this.guests = guests;
             console.log("Storing guests fetched from database...");
@@ -46,8 +46,9 @@ export const useGuestsStore = defineStore('guests', {
                 const guestId = updatedGuest.uid;
                 const guestDocRef = doc(this.guestsRef, guestId);
 
+                const guestDocContent = updatedGuest;
                 // Update the guest document with the new data
-                await updateDoc(guestDocRef, updatedGuest);
+                await updateDoc(guestDocRef, guestDocContent);
 
                 // Update the guest in the local state
                 const index = this.guests.findIndex(guest => guest.uid === guestId);
@@ -57,7 +58,7 @@ export const useGuestsStore = defineStore('guests', {
                     console.error("Guest not found in local state.");
                 }
 
-                console.log("Guest updated successfully:", updatedGuest);
+                // console.log("Guest updated successfully:", updatedGuest);
             } catch (error) {
                 console.error("Error updating guest:", error.message);
             }

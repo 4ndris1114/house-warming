@@ -78,7 +78,7 @@ import {planets} from "@/lists/TheList"
     const todaysDate = new Date();
 
     const todaysDateString = new Date().getDate() + "/" + (todaysDate.getMonth()+1) + "/" + todaysDate.getFullYear();
-    console.log(todaysDateString);
+    // console.log(todaysDateString);
     
     
     const ruleChecks = [
