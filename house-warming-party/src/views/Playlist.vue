@@ -7,18 +7,16 @@
     
     <table v-if="newestTracks.length" class="track-table">
       <thead>
-        <!-- Remove the entire first column -->
-        <!-- <th></th> -->
         <th>Track Name</th>
       </thead>
       <tbody>
         <tr v-for="(track, index) in newestTracks" :key="track.id">
-          <!-- Remove the entire first column -->
-          <!-- <td></td> -->
           <td>{{ track.name }}</td>
         </tr>
       </tbody>
     </table>
+    
+    <BackToHomeButton v-if="showBackButton" />
   </div>
 </template>
 
@@ -35,6 +33,11 @@ export default {
   },
   mounted() {
     this.getAccessToken();
+  },
+  computed: {
+    showBackButton() {
+      return this.$route.name !== 'home';
+    }
   },
   methods: {
     async getAccessToken() {
@@ -78,6 +81,9 @@ export default {
       const playlistURI = this.playlistId;
       window.location.href = `https://open.spotify.com/playlist/${playlistURI}`;
     },
+    goBack() {
+      this.$router.push({ name: 'home' });
+    }
   },
 };
 </script>
@@ -87,6 +93,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative; /* Ensure proper positioning of absolute elements */
 }
 
 .header-text {
@@ -94,8 +101,9 @@ export default {
   color: #052240;
   font-weight: bold;
   text-align: center;
-  width: 80%; /* Adjust width to match table */
+  width: 80%;
   margin-top: 5vw;
+  margin-bottom: 1vw;
 }
 
 .sub-text {
@@ -108,7 +116,7 @@ export default {
   font-size: 1.8vw;
   color: #052240;
   text-align: center;
-  margin-bottom: 2vw; /* Add margin-bottom */
+  margin-bottom: 2vw;
 }
 
 .cool-button {
@@ -124,7 +132,7 @@ export default {
   background-color: #ffffff;
   border-radius: 2vw;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  margin-bottom: 4vw; /* Add margin-bottom */
+  margin-bottom: 3vw;
 }
 
 .cool-button:hover {
@@ -147,5 +155,25 @@ export default {
   background-color: #BE3455;
   color: #ffffff;
   border-radius: 2vw;
+}
+
+.back-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999; /* Ensure it's above other elements */
+  padding: 20px; /* Increase padding for larger button */
+  font-size: 24px; /* Increase font size for larger button */
+  text-align: center;
+  background-color: #BE3455;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%; /* Make it circular */
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+  background-color: #A0293E;
 }
 </style>

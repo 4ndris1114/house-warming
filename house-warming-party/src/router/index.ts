@@ -6,6 +6,8 @@ import Playlist from '@/views/Playlist.vue';
 import PageNotFound from '@/views/PageNotFound.vue';
 import Login from "@/views/Login.vue";
 import LoginSignup from "@/views/LoginSignup.vue";
+import Information from "@/views/Information.vue";
+import Requirements from "@/views/Requirements.vue";
 import {useGuestsStore} from "@/stores/guestsStore";
 
 const router = createRouter({
@@ -40,6 +42,16 @@ const router = createRouter({
       path: '/playlist',
       name: 'playlist',
       component: Playlist
+    },
+    {
+      path: '/information',
+      name: 'information',
+      component: Information
+    },
+    {
+      path: '/requirements',
+      name: 'requirements',
+      component: Requirements
     },
     {
       path: '/:pathMatch(.*)*', 

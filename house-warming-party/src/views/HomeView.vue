@@ -4,26 +4,28 @@
       <!-- Login Panel -->
       <div class="countdown">
         <h1>Countdown Timer</h1>
+        <img src="@/assets/stars.png" alt="Stars" class="other-picture"></img>
         <p v-if="remainingTime > 0" style="color: white;">Time Remaining: {{ remainingTimeString }}</p>
         <p v-else>The countdown has ended!</p>
       </div>
     
       <div class="menu">
-      <RouterLink to="/guest-list" class="cool-button">Guest list</RouterLink>
-      <router-link to="/requirements" class="cool-button">Requirements</router-link>
-      <router-link to="/playlist" class="cool-button">Playlist</router-link>
-      <router-link to="/password-game" class="cool-button">Change password</router-link>
-      <router-link to="/map" class="cool-button">Address</router-link>
-      <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
+        <RouterLink to="/guest-list" class="cool-button">Guest list</RouterLink>
+        <router-link to="/information" class="cool-button">Information</router-link>
+        <router-link to="/requirements" class="cool-button">Requirements</router-link>
+        <router-link to="/playlist" class="cool-button">Playlist</router-link>
+        <router-link to="/password-game" class="cool-button">Change password</router-link>
+        <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
       </div>
     </div>
     <div class="loginPanel">
-            <div v-if="loggedInUser" class="logged-in-info">
-              Logged in as: {{ loggedInUser.email }}
-            </div>
-            <button v-if="loggedInUser" @click="logout" class="logout-button">Log out</button>
-          </div>
+      <div v-if="loggedInUser" class="logged-in-info">
+        Logged in as: {{ loggedInUser.email }}
+      </div>
+      <button v-if="loggedInUser" @click="logout" class="logout-button">Log out</button>
+    </div>
   </div>
+  <img src="@/assets/kvetináč.png" alt="Small Picture" class="small-picture">
   <router-view />
 </template>
 
@@ -45,7 +47,7 @@ const logout = () => {
 
 //-----------countdown-----------
 
-const endDateTime = new Date('2024-02-17T17:00:00').getTime(); // End date and time in milliseconds
+const endDateTime = new Date('2024-02-17T16:00:00').getTime(); // End date and time in milliseconds
 const remainingTime = ref(0);
 let timer: ReturnType<typeof setInterval> | null = null;
 
@@ -118,7 +120,7 @@ const remainingTimeString = computed(() => {
   color: #BE3455;
   background-color: #ffffff;
   border-radius: 5vw;
-  width:15vw; /* Set width to auto */
+  width:15vw;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
@@ -165,5 +167,22 @@ const remainingTimeString = computed(() => {
 .logout-button:hover {
   background-color: #ffffff;
   color: #BE3455;
+}
+
+.small-picture {
+  width: 40vw; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  position: fixed; /* Position the picture */
+  left: 1vw;
+  bottom: 4vw; /* Distance from the bottom */
+  z-index: 9999; /* Ensure it's above other elements */
+}
+.other-picture {
+  width: 20vw; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  position: fixed; /* Position the picture */
+  top : 3vw; /* Distance from the bottom */
+  right: 0.1vw; /* Distance from the left */
+  z-index: 9999; /* Ensure it's above other elements */
 }
 </style>
