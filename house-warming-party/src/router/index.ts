@@ -6,6 +6,7 @@ import Playlist from '@/views/Playlist.vue';
 import PageNotFound from '@/views/PageNotFound.vue';
 import Login from "@/views/Login.vue";
 import LoginSignup from "@/views/LoginSignup.vue";
+import GuestList from "@/views/GuestList.vue";
 import {useGuestsStore} from "@/stores/guestsStore";
 
 const router = createRouter({
@@ -30,6 +31,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/guest-list',
+      name: 'guestlist',
+      component: GuestList
     },
     {
       path: '/password-game',
