@@ -28,7 +28,7 @@ const guests = computed(() => {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 3rem; /* Add padding to accommodate the first card */
+    padding-top: 10rem; /* Add padding to accommodate the first card */
     gap: 1.25rem;
 }
 
@@ -47,7 +47,7 @@ const guests = computed(() => {
     .card-container {
         flex-direction: column;
         align-items: center;
-        padding-top: 50rem;
+        padding-top: 75rem;
     }
 
     .card {
