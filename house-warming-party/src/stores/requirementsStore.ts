@@ -37,7 +37,7 @@ export const useRequirementsStore = defineStore('requirements', {
                         this.requirements.push(requirement);
                     }
                 } catch (error) {
-                    console.log("Error adding requirement: ",error.message);
+                    console.log("Error adding requirement: ",(error as Error).message);
                 }
             },
         }

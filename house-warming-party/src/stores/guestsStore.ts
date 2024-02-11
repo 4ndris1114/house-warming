@@ -38,7 +38,7 @@ export const useGuestsStore = defineStore('guests', {
                     this.guests.push(guest);
                 }
             } catch (error) {
-                console.log("Error adding guest: ",error.message);
+                console.log("Error adding guest: ",(error as Error).message);
             }
         },
         async updateGuest(updatedGuest: Guest) {
@@ -51,7 +51,7 @@ export const useGuestsStore = defineStore('guests', {
                 await updateDoc(guestDocRef, guestDocContent);
 
                 // Update the guest in the local state
-                const index = this.guests.findIndex(guest => guest.uid === guestId);
+                const index = this.guests.findIndex((guest: Guest) => guest.uid === guestId);
                 if (index !== -1) {
                     this.guests[index] = updatedGuest;
                 } else {
@@ -60,7 +60,7 @@ export const useGuestsStore = defineStore('guests', {
 
                 // console.log("Guest updated successfully:", updatedGuest);
             } catch (error) {
-                console.error("Error updating guest:", error.message);
+                console.error("Error updating guest:", (error as Error).message);
             }
         },
         async setLoggedInGuest(guest: Guest) {

@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import {useGuestsStore} from '@/stores/guestsStore';
+import type { Guest } from '@/types/Guest';
 
 onMounted(() => {
     guestsStore.fetchGuests();
@@ -38,7 +39,7 @@ const guestList = computed(() => {
 
 const isLoginValid = () => {
     let isValid = false;
-    guestList.value.forEach(guestFromList => {
+    guestList.value.forEach((guestFromList: any) => {
         if (guestFromList.email === guest.value.email && guestFromList.password === guest.value.password) {
             loggedInGuest.value = guestFromList;
             isValid = true;
@@ -54,7 +55,7 @@ const login = async () => {
         console.log('Login successful');
         await guestsStore.setLoggedInGuest(loggedInGuest.value);
         console.log('Logged in user:', guestsStore.loggedInGuest);
-        if (loggedInGuest.value.password === "banana") {
+        if (loggedInGuest.value !== null && (loggedInGuest.value as Guest).password === "banana") {
             if (confirm("You are now logged in...Although, your password isn't too secure, right?\nMight be a good idea to change it?")) {
                 window.alert("Wise choice...Go ahead and do it!😇");
                 window.location.href = "/";

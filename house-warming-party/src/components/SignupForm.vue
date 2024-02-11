@@ -35,6 +35,7 @@
 import { useGuestsStore } from '@/stores/guestsStore';
 import { computed, onMounted, ref } from 'vue';
 import { animals } from "@/lists/TheList";
+import type { Guest } from '@/types/Guest';
 
 onMounted(() => {
     guestsStore.fetchGuests();
@@ -54,7 +55,7 @@ const isEmailValid = computed(() => {
     return emailRegex.test(newGuest.value.email);
 });
 const isEmailUnique = computed(() => {
-    return !guestList.value.some(guest => guest.email === newGuest.value.email);
+    return !guestList.value.some((guest: Guest) => guest.email === newGuest.value.email);
 });
 const registerAttempted = ref(false);
 

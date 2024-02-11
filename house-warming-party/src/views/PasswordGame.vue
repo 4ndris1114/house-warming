@@ -31,9 +31,9 @@
 <script setup lang="ts">
 import RuleComponent from "@/components/RuleComponent.vue";
 import PasswordEndGame from "@/components/PasswordEndGame.vue";
-import type Rule from '@/types/Rule.vue';
+import {Rule} from '@/types/Rule';
 import {useRulesStore} from "@/stores/rulesStore"
-import { computed, type ComputedRef, onMounted, ref } from 'vue';
+import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue';
 import axios from 'axios'
 
 import {capitals} from "@/lists/TheList";
@@ -67,7 +67,7 @@ import {planets} from "@/lists/TheList"
     return dummy.reverse();
     });
     
-    const newlyUnlockedRule: Rule = ref(null);
+    const newlyUnlockedRule: Ref<Rule> = ref(new Rule(0,'',false,false));
 
     const unlockFirst = () => {
         if (!rules.value[0].isUnlocked) { //is not unlocked already
