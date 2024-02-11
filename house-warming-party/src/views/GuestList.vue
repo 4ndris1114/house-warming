@@ -5,6 +5,9 @@
             <GuestCard v-for="guest in guests" :key="guest.uid" :guest="guest" class="card"></GuestCard>
         </div>
     </div>
+    <a href="/" class="back-home-btn">
+      <img src="https://api.iconify.design/ion:home.svg" alt="Home Icon">
+    </a>
 </template>
 
 <script setup lang="ts">
@@ -28,7 +31,7 @@ const guests = computed(() => {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 3rem; /* Add padding to accommodate the first card */
+    padding-top: 10rem; /* Add padding to accommodate the first card */
     gap: 1.25rem;
 }
 
@@ -47,7 +50,7 @@ const guests = computed(() => {
     .card-container {
         flex-direction: column;
         align-items: center;
-        padding-top: 50rem;
+        padding-top: 70rem;
     }
 
     .card {
