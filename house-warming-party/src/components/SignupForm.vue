@@ -62,7 +62,7 @@ const registerAttempted = ref(false);
 const selectedAnimal = ref('');
 
 const getAnimalImageUrl = (animal: string) => {
-    return `../assets/animals/${animal.toLowerCase()}.jpg`;
+    return `../assets/${animal.toLowerCase()}.jpg`;
 }
 
 const registerGuest = () => {
