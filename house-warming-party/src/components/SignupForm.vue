@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { useGuestsStore } from '@/stores/guestsStore';
 import { computed, onMounted, ref } from 'vue';
-import { animals } from "@/lists/TheList";
+import { animals, getAnimalImageUrl } from "@/lists/TheList";
 import type { Guest } from '@/types/Guest';
 
 onMounted(() => {
@@ -60,10 +60,6 @@ const isEmailUnique = computed(() => {
 const registerAttempted = ref(false);
 
 const selectedAnimal = ref('');
-
-const getAnimalImageUrl = (animal: string) => {
-    return `../assets/${animal.toLowerCase()}.jpg`;
-}
 
 const registerGuest = () => {
     registerAttempted.value = true;

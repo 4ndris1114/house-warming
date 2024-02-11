@@ -25,7 +25,7 @@
 import { Guest } from '@/types/Guest';
 import { defineProps, onMounted, ref, watch } from 'vue';
 import { useGuestsStore } from '../stores/guestsStore';
-import { animals } from "@/lists/TheList";
+import { animals, getAnimalImageUrl } from "@/lists/TheList";
 
 const guestsStore = useGuestsStore();
 const loggedInGuest = guestsStore.loggedInGuest;
@@ -37,24 +37,26 @@ const props = defineProps({
     }
 });
 
+const selectedAnimal = ref('');
 const imageSrc = ref('');
 
 onMounted(async () => {
     try {
-        const { default: image } = await import(/* @vite-ignore */ props.guest.animalRef);
-        imageSrc.value = image;
+        imageSrc.value = props.guest.animalRef;
     } catch (error) {
         console.error('Error loading image:', error);
     }
 });
 
-const selectedAnimal = ref('');
 
 watch(selectedAnimal, async (newValue, oldValue) => {
     if (newValue !== oldValue) {
         try {
-            const { default: image } = await import(/* @vite-ignore */ `../assets/${newValue}.jpg`);
-            imageSrc.value = image;
+            if (selectedAnimal.value !== ''){
+                imageSrc.value = getAnimalImageUrl(selectedAnimal.value);
+                console.log(imageSrc.value);
+                
+            }
         } catch (error) {
             console.error('Error loading image:', error);
         }
@@ -63,13 +65,14 @@ watch(selectedAnimal, async (newValue, oldValue) => {
 
 const updatePicture = async () => {
     // Logic to update the picture source
-    const { default: image } = await import(/* @vite-ignore */ props.guest.animalRef);
-    imageSrc.value = image;
+    if (selectedAnimal.value !== '') {
+        imageSrc.value = getAnimalImageUrl(selectedAnimal.value);
+    }
 }
 
 const changePicture = () => {
     const toBeUpdatedGuest: Guest = guestsStore.loggedInGuest;
-    toBeUpdatedGuest.animalRef = `../assets/${selectedAnimal.value.toLowerCase()}.jpg`;
+    toBeUpdatedGuest.animalRef = getAnimalImageUrl(selectedAnimal.value);
     guestsStore.updateGuest(toBeUpdatedGuest as Guest);
     updatePicture();
 }
