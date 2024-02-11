@@ -18,7 +18,7 @@ export const useRequirementsStore = defineStore('requirements', {
                 const requirementsQuery = query(this.requirementsRef, orderBy("index", "asc"));
                 const requirementsSnap = await getDocs(requirementsQuery);
                 const requirements: Requirement[] = requirementsSnap.docs.map((doc) => Requirement.fromDocumentSnapshot(doc));
-                console.log("Fetched requirements: ", requirements);
+                // console.log("Fetched requirements: ", requirements);
                 
                 this.requirements = requirements;
                 console.log("Storing requirements fetched from database...");
@@ -31,7 +31,7 @@ export const useRequirementsStore = defineStore('requirements', {
                         
                         const requirementDocContent = requirement; //this should be guest.toJson() ???
                         const addedRequirementRef = await addDoc(requirementsCollection, requirementDocContent);
-                        console.log("Added requirement doc id: ", addedRequirementRef.id);
+                        // console.log("Added requirement doc id: ", addedRequirementRef.id);
                         requirement.uid = addedRequirementRef.id;
                         console.log("Added requirement: ", JSON.stringify(requirement));
                         this.requirements.push(requirement);
