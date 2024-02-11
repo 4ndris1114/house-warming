@@ -4,11 +4,9 @@
       <!-- Login Panel -->
       <div class="countdown">
         <h1>Countdown Timer</h1>
-        <img src="@/assets/stars.png" alt="Stars" class="other-picture"></img>
         <p v-if="remainingTime > 0" style="color: white;">Time Remaining: {{ remainingTimeString }}</p>
         <p v-else>The countdown has ended!</p>
       </div>
-    
       <div class="menu">
         <RouterLink to="/guest-list" class="cool-button">Guest list</RouterLink>
         <router-link to="/information" class="cool-button">Information</router-link>
@@ -17,7 +15,7 @@
         <router-link to="/password-game" class="cool-button">Change password</router-link>
         <!-- <router-link to="/your-information" class="cool-button">Your information</router-link> -->
       </div>
-    </div>
+    </div>   
     <div class="loginPanel">
       <div v-if="loggedInUser" class="logged-in-info">
         Logged in as: {{ loggedInUser.email }}
@@ -27,6 +25,7 @@
   </div>
   <img src="@/assets/kvetináč.png" alt="Small Picture" class="small-picture">
   <router-view />
+
 </template>
 
 <script setup lang="ts">
@@ -95,6 +94,7 @@ const remainingTimeString = computed(() => {
   border-radius: 2rem;
   margin-top: 20px;
   text-align: center;
+  position: relative; /* Ensure relative positioning for the absolute positioned child */
 }
 
 .countdown {
@@ -170,19 +170,11 @@ const remainingTimeString = computed(() => {
 }
 
 .small-picture {
-  width: 40vw; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  position: fixed; /* Position the picture */
-  left: 1vw;
-  bottom: 4vw; /* Distance from the bottom */
-  z-index: 9999; /* Ensure it's above other elements */
-}
-.other-picture {
-  width: 20vw; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  position: fixed; /* Position the picture */
-  top : 3vw; /* Distance from the bottom */
-  right: 0.1vw; /* Distance from the left */
-  z-index: 9999; /* Ensure it's above other elements */
+  width: 40vw;
+  height: auto;
+  position: fixed;
+  left: -10vw;
+  bottom: 4vw;
+  z-index: 9999;
 }
 </style>

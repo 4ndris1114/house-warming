@@ -4,6 +4,7 @@
     <p class="sub-text">Let's make it a collection of bangers!</p>
     <button class="cool-button" @click="redirectToPlaylist">Go to Playlist</button>
     <p class="table-description-text" style="color: #052240;">You can look forward to these songs:</p>
+    <img src="@/assets/tancujuciKvetinac.png" alt="tKvet" class="picture"></img>
     
     <table v-if="newestTracks.length" class="track-table">
       <thead>
@@ -15,9 +16,10 @@
         </tr>
       </tbody>
     </table>
-    
-    <BackToHomeButton v-if="showBackButton" />
   </div>
+  <a href="/" class="back-home-btn">
+  <img src="https://api.iconify.design/ion:home.svg" alt="Home Icon">
+</a>
 </template>
 
 <script>
@@ -156,24 +158,40 @@ export default {
   color: #ffffff;
   border-radius: 2vw;
 }
-
-.back-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+.picture {
+  width: 20vw; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  position: fixed; /* Position the picture */
+  right: 2.5vw;
+  bottom: 20vw; /* Distance from the bottom */
   z-index: 9999; /* Ensure it's above other elements */
-  padding: 20px; /* Increase padding for larger button */
-  font-size: 24px; /* Increase font size for larger button */
-  text-align: center;
-  background-color: #BE3455;
-  color: #ffffff;
-  border: none;
-  border-radius: 50%; /* Make it circular */
-  cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.back-home-btn {
+  display: inline-block;
+  padding: 1vw 1vw; /* Adjust padding as needed */
+  background-color: #95deff; /* Button background color */
+  color: #fff; /* Button text color */
+  text-decoration: none; /* Removing underline from anchor tag */
+  border: none; /* Removing button border */
+  border-radius: 5vw; /* Button border-radius */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Button box shadow */
+  transition: background-color 0.3s ease; /* Transition effect for background-color */
+  position: absolute; /* Position the button */
+  bottom: 3vw; /* Distance from the bottom */
+  right: 20vw; /* Distance from the right */
+}
+.back-home-btn img {
+  width: 25px; /* Adjust the width of the icon */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure proper positioning of the icon */
+  margin: auto; /* Center the icon horizontally */
 }
 
-.back-button:hover {
-  background-color: #A0293E;
+.back-home-btn:hover {
+  background-color: #004b6b;
+}
+
+.back-home-btn:hover img {
+  filter: brightness(0) invert(1); /* Invert the colors to make the icon white on hover */
 }
 </style>
