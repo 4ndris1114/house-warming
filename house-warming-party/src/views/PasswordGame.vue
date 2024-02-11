@@ -23,6 +23,9 @@
             </div>
         </div>
     </div>
+    <a href="/" class="back-home-btn">
+      <img src="https://api.iconify.design/ion:home.svg" alt="Home Icon">
+    </a>
 </template>
 
 <script setup lang="ts">
@@ -221,11 +224,10 @@ import {planets} from "@/lists/TheList"
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 0.1rem solid #ccc;
-        border-radius: 1rem;
+        border: 0.5vw solid #052240;
+        border-radius: 2vw;
         padding: 1.5rem;
         width: 50rem;
-        border-color: #000000;
         overflow-y: auto; /* Enable vertical scrolling */
     }
 
@@ -278,7 +280,32 @@ import {planets} from "@/lists/TheList"
         border-color: #007bff;
         box-shadow: 0 0 0.4rem rgba(0, 123, 255, 0.5);
     }
+    .back-home-btn {
+  display: inline-block;
+  padding: 1vw 1vw; /* Adjust padding as needed */
+  background-color: #95deff; /* Button background color */
+  color: #fff; /* Button text color */
+  text-decoration: none; /* Removing underline from anchor tag */
+  border: none; /* Removing button border */
+  border-radius: 5vw; /* Button border-radius */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Button box shadow */
+  transition: background-color 0.3s ease; /* Transition effect for background-color */
+  position: absolute; /* Position the button */
+  bottom: 3vw; /* Distance from the bottom */
+  right: 15vw; /* Distance from the right */
+}
+.back-home-btn img {
+  width: 25px; /* Adjust the width of the icon */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure proper positioning of the icon */
+  margin: auto; /* Center the icon horizontally */
+}
 
+.back-home-btn:hover {
+  background-color: #004b6b;
+}
 
-
+.back-home-btn:hover img {
+  filter: brightness(0) invert(1); /* Invert the colors to make the icon white on hover */
+}
 </style>
