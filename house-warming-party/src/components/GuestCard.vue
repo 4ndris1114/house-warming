@@ -1,6 +1,7 @@
 <template>
     <div :key="props.guest.uid" class="card">
         <div v-if="props.guest.email === loggedInGuest.email" class="dropdown-container">
+            Change picture: 
             <select v-model="selectedAnimal" @change="changePicture()">
                 <option v-for="(picture, index) in animals" :key="index" :value="picture">
                   {{ picture }}
@@ -59,7 +60,7 @@ watch(selectedAnimal, async (newValue, oldValue) => {
         }
     }
 });
-const imageKey = ref(false);
+
 const updatePicture = async () => {
     // Logic to update the picture source
     const { default: image } = await import(/* @vite-ignore */ props.guest.animalRef);
