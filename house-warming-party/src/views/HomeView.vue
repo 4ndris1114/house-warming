@@ -92,6 +92,8 @@ const remainingTimeString = computed(() => {
   background-color: #004b6b;
   border: 1.25rem solid #BE3455;
   border-radius: 2rem;
+  border-end-end-radius: 0rem;
+  border-end-start-radius: 0rem;
   margin-top: 20px;
   text-align: center;
   position: relative; /* Ensure relative positioning for the absolute positioned child */
@@ -144,14 +146,14 @@ const remainingTimeString = computed(() => {
 }
 
 .logged-in-info {
-  margin-top: 0.8rem;
+  margin-top: 2rem;
   font-size: 0.8rem;
   margin-bottom: 0.2rem;
 }
 
 .logout-button {
   margin-top: 0.2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
   padding: 0.4rem 0.8rem;
   font-size: 0.7rem;
   font-weight: bold;
