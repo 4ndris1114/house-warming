@@ -2,7 +2,7 @@
   <div class="container">
     <div class="requirements-input">
       <h2>Special Requirements</h2>
-      <label for="specialRequirement">Whatcha want ha?!</label>
+      <label for="specialRequirement">Excuse me, good sir or madam, watcha want ha?!</label>
       <div class="error-message" v-if="showErrorMessage">
         Your requirements must be at least 1 character long and cannot exceed 200 characters.
       </div>
@@ -64,17 +64,11 @@ const submitRequirements = () => {
 <style scoped>
 
 .container {
-  min-height: 17rem;
-    min-width: 50rem;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    border-style: solid;
-    border-width: 0.01rem;
-    height: 18rem;
-  border-radius: 2rem;
-
-  border: 0.5rem solid #052240;
+  width: 25vw;
+    padding: 20px;
+    border: 1vw solid #052240;
+    border-radius: 2vw;
+    margin-bottom: 2vw;
 
 }
 /* .requirements-list {
