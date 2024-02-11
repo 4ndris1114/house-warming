@@ -5,9 +5,6 @@
             <GuestCard v-for="guest in guests" :key="guest.uid" :guest="guest" class="card"></GuestCard>
         </div>
     </div>
-    <a href="/" class="back-home-btn">
-      <img src="https://api.iconify.design/ion:home.svg" alt="Home Icon">
-    </a>
 </template>
 
 <script setup lang="ts">
