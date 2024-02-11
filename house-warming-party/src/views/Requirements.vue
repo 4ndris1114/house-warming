@@ -2,7 +2,7 @@
   <div class="container">
     <div class="requirements-input">
       <h2>Special Requirements</h2>
-      <label for="specialRequirement">Excuse me, good sir or madam, watcha want ha?!</label>
+      <label for="specialRequirement">Excuse me, good sir or madam, might I inquire as to your preferences or desires at this moment in time to humbly ask WATCHA WANT HA?!</label>
       <div class="error-message" v-if="showErrorMessage">
         Your requirements must be at least 1 character long and cannot exceed 200 characters.
       </div>
