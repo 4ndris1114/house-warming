@@ -53,7 +53,7 @@ const selectedAnimal = ref('');
 watch(selectedAnimal, async (newValue, oldValue) => {
     if (newValue !== oldValue) {
         try {
-            const { default: image } = await import(/* @vite-ignore */ `../assets/animals/${newValue}.jpg`);
+            const { default: image } = await import(/* @vite-ignore */ `../assets/${newValue}.jpg`);
             imageSrc.value = image;
         } catch (error) {
             console.error('Error loading image:', error);
@@ -69,7 +69,7 @@ const updatePicture = async () => {
 
 const changePicture = () => {
     const toBeUpdatedGuest: Guest = guestsStore.loggedInGuest;
-    toBeUpdatedGuest.animalRef = `../assets/animals/${selectedAnimal.value.toLowerCase()}.jpg`;
+    toBeUpdatedGuest.animalRef = `../assets/${selectedAnimal.value.toLowerCase()}.jpg`;
     guestsStore.updateGuest(toBeUpdatedGuest as Guest);
     updatePicture();
 }
