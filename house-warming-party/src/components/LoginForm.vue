@@ -54,7 +54,19 @@ const login = async () => {
         console.log('Login successful');
         await guestsStore.setLoggedInGuest(loggedInGuest.value);
         console.log('Logged in user:', guestsStore.loggedInGuest);
-        window.location.href = "/";
+        if (loggedInGuest.value.password === "banana") {
+            if (confirm("You are now logged in...Although, your password isn't too secure, right?\nMight be a good idea to change it?")) {
+                window.alert("Wise choice...Go ahead and do it!😇");
+                window.location.href = "/";
+            } else {
+                window.alert("So you have chosen to resist😡 Try again!");
+                guestsStore.logout();
+                window.location.href = "/login";
+            }
+        } else {
+            window.location.href = "/";
+        }
+        
     } else {
         console.log('Login failed');
     }

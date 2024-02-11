@@ -8,6 +8,7 @@ import Login from "@/views/Login.vue";
 import LoginSignup from "@/views/LoginSignup.vue";
 import Information from "@/views/Information.vue";
 import Requirements from "@/views/Requirements.vue";
+import GuestList from "@/views/GuestList.vue";
 import {useGuestsStore} from "@/stores/guestsStore";
 
 const router = createRouter({
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/guest-list',
+      name: 'guestlist',
+      component: GuestList
     },
     {
       path: '/password-game',
@@ -66,7 +72,7 @@ router.beforeEach(async (to, from, next) => {
   const guestsStore = useGuestsStore();
   await guestsStore.$state.loaded;
 
-  console.log("Logged in as: ", guestsStore.loggedInGuest);
+  // console.log("Logged in as: ", guestsStore.loggedInGuest);
   
   if (guestsStore.loggedInGuest !== null && guestsStore.loggedInGuest !== undefined) {
     next();

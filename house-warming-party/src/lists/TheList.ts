@@ -74,5 +74,12 @@ export const planets = [
     'Neptune'
 ];
 
+export const animals: string[] = [
+    'Alpaca', 'Cat', 'Chimpanzee', 'Deer', 'Dog',
+    'Eagle', 'Elephant', 'Flamingo', 'Giraffe',
+    'Goat', 'Hen', 'Horse', 'Lion', 'Owl', 'Parrot',
+    'Rabbit', 'Rhinoceros', 'Squirrel', 'Tiger'
+];
+
 // my little test password:
-// Budapest7/2/2024Isten,álddmegamagyart1MercuryHangar36700a2+b2=c2
+// Budapest9/2/2024Isten,álddmegamagyart1MercuryHangar16700a2+b2=c2|kayak|AndrasKatie

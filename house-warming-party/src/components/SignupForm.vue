@@ -34,6 +34,7 @@
 <script setup lang="ts">
 import { useGuestsStore } from '@/stores/guestsStore';
 import { computed, onMounted, ref } from 'vue';
+import { animals } from "@/lists/TheList";
 
 onMounted(() => {
     guestsStore.fetchGuests();
@@ -58,15 +59,9 @@ const isEmailUnique = computed(() => {
 const registerAttempted = ref(false);
 
 const selectedAnimal = ref('');
-const animals: string[] = [
-    'Alpaca', 'Cat', 'Chimpanzee', 'Deer', 'Dog',
-    'Eagle', 'Elephant', 'Flamingo', 'Giraffe',
-    'Goat', 'Hen', 'Horse', 'Lion', 'Owl', 'Parrot',
-    'Rabbit', 'Rhinoceros', 'Squirrel', 'Tiger'
-];
 
 const getAnimalImageUrl = (animal: string) => {
-    return `./assets/animals/${animal.toLowerCase()}.jpg`;
+    return `../assets/animals/${animal.toLowerCase()}.jpg`;
 }
 
 const registerGuest = () => {

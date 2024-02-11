@@ -121,27 +121,6 @@ export default {
   margin-bottom: 2vw;
 }
 
-.cool-button {
-  display: inline-block;
-  padding: 1vw 2vw;
-  font-size: 1.5vw;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  border: 0.2vw solid #BE3455;
-  color: #BE3455;
-  background-color: #ffffff;
-  border-radius: 2vw;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-  margin-bottom: 3vw;
-}
-
-.cool-button:hover {
-  background-color: #BE3455;
-  color: #ffffff;
-}
-
 .track-table {
   width: 80%;
   border-collapse: collapse;

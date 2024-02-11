@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { db } from "@/firebase/firebase";
 import { defineStore } from 'pinia'
-import { collection, getDocs, type CollectionReference, addDoc } from 'firebase/firestore';
+import { collection, getDocs, type CollectionReference, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { Guest } from '@/types/Guest';
 
 export const useGuestsStore = defineStore('guests', {
@@ -19,7 +19,7 @@ export const useGuestsStore = defineStore('guests', {
             console.log("Starting to fetch guest list...");
             const guestSnap = await getDocs(this.guestsRef);
             const guests: Guest[] = guestSnap.docs.map((doc) => Guest.fromDocumentSnapshot(doc));
-            console.log("Fetched guests: ", guests);
+            // console.log("Fetched guests: ", guests);
             
             this.guests = guests;
             console.log("Storing guests fetched from database...");
@@ -39,6 +39,28 @@ export const useGuestsStore = defineStore('guests', {
                 }
             } catch (error) {
                 console.log("Error adding guest: ",error.message);
+            }
+        },
+        async updateGuest(updatedGuest: Guest) {
+            try {
+                const guestId = updatedGuest.uid;
+                const guestDocRef = doc(this.guestsRef, guestId);
+
+                const guestDocContent = updatedGuest;
+                // Update the guest document with the new data
+                await updateDoc(guestDocRef, guestDocContent);
+
+                // Update the guest in the local state
+                const index = this.guests.findIndex(guest => guest.uid === guestId);
+                if (index !== -1) {
+                    this.guests[index] = updatedGuest;
+                } else {
+                    console.error("Guest not found in local state.");
+                }
+
+                // console.log("Guest updated successfully:", updatedGuest);
+            } catch (error) {
+                console.error("Error updating guest:", error.message);
             }
         },
         async setLoggedInGuest(guest: Guest) {
